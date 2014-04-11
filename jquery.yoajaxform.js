@@ -2,7 +2,7 @@
 // http://chrisltd.com
 // Created April 2014
 // Version .01
-// Plugin to handle validating and submitting ajax forms
+// jQuery plugin to handle validating and submitting ajax forms
 
 (function( $ ){
 

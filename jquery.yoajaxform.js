@@ -11,6 +11,8 @@
     // CREATE SOME DEFAULTS, EXTENDING THEM WITH ANY OPTIONS THAT WERE PROVIDED
     var settings = $.extend( {
       'showErrors'            : true,                               // show or hide errors
+      'errorClass'            : 'error',                            // class applied to inputs that fail validation
+      'errorMessageClass'     : 'error-message',                    // class of validation error messages
       'formAction'            : 'POST',                             // GET or POST
       'formUrl'               : 'http://google.com',                // form url
       'additionalData'        : 'q=foobar',                         // extra form data passed along              
@@ -49,10 +51,10 @@
       var validated = [];
 
       // Check for the different data validation fields, validate them in turn, return true or false
-      var presenceFieldsDataName = "[data-validate-presence]"; // check to see if any value is input
-      var presenceValueFieldsDataName = "[data-validate-value-presence]"; // check to see if any pseudo data-value exists
-      var emailFieldsDataName = "[data-validate-email]"; // check for a valid email address 
-      var checkedFieldsDataName = "[data-validate-checked]"; // check checked checkbox
+      var presenceFieldsDataName = "[data-validate-presence]";              // check to see if any value is input
+      var presenceValueFieldsDataName = "[data-validate-value-presence]";   // check to see if any pseudo data-value exists
+      var emailFieldsDataName = "[data-validate-email]";                    // check for a valid email address 
+      var checkedFieldsDataName = "[data-validate-checked]";                // check checked checkbox
 
       var $presenceFields = $(presenceFieldsDataName, $form);
       var $presenceValueFields = $(presenceValueFieldsDataName, $form);
@@ -125,10 +127,14 @@
     function displayErrors($this, result, dataName){
       if( !showErrors ){
         return;
-      } 
-      $this.removeClass('error');
+      }
+      $this.removeClass( settings.errorClass );
+      $this.next('.' + settings.errorMessageClass).remove();
       if( !result ){
-        $this.addClass('error');
+        var dataAttribute = dataName.substr(6);
+        dataAttribute = dataAttribute.substr(0, dataAttribute.length-1);
+        $this.after('<span class="' + settings.errorMessageClass + '">' + $this.data(dataAttribute) + '</span>');
+        $this.addClass( settings.errorClass );
       }
     }
 

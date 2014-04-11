@@ -10,20 +10,20 @@
 
     // CREATE SOME DEFAULTS, EXTENDING THEM WITH ANY OPTIONS THAT WERE PROVIDED
     var settings = $.extend( {
-      'showErrors'                  : true,                             // show or hide errors
-      'formAction'                  : 'POST',                           // GET or POST
-      'formUrl'                     : 'http://google.com',              // form url
-      'additionalData'              : 'q=foobar',                       // extra form data passed along              
-      'postAction'                  : 'post_subscribe',                 // ajax action
-      'beforeAjaxCallback'          : function(postDataString) {},      // called immediately before ajax request
-      'successTest'                 : function(data) { return true },   // called to test the success of the ajax request
-      'validCallback'               : function($form) {},               // called if form is valid 
-      'invalidCallback'             : function($form) {},               // called if form is invalid 
-      'initCallback'                : function() {},                    // called if plugin initialized on an object
-      'successCallback'             : function(data) {},                // called if form is successfully submitted
-      'failureCallback'             : function(data) {},                // called if form submission fails
-      'errorCallback'               : function(data, status, error) {}, // called if the ajax call fails
-      'alwaysCallback'              : function(data, status) {}         // called if the ajax call fails
+      'showErrors'                  : true,                               // show or hide errors
+      'formAction'                  : 'POST',                             // GET or POST
+      'formUrl'                     : 'http://google.com',                // form url
+      'additionalData'              : 'q=foobar',                         // extra form data passed along              
+      'postAction'                  : 'post_subscribe',                   // ajax action
+      'beforeAjaxCallback'          : function(postDataString) {},        // called immediately before ajax request
+      'successTest'                 : function(data) { return true },     // called to test the success of the ajax request
+      'validCallback'               : function($form) {},                 // called if form is valid 
+      'invalidCallback'             : function($form) {},                 // called if form is invalid 
+      'initCallback'                : function() {},                      // called if plugin initialized on an object
+      'successCallback'             : function(data) {},                  // called if form is successfully submitted
+      'failureCallback'             : function(data) {},                  // called if form submission fails
+      'errorCallback'               : function(data, status, error) {},   // called if the ajax call fails
+      'alwaysCallback'              : function(data, status) {}           // called if the ajax call fails
     }, options);
 
     // GLOBAL VARIABLES

@@ -26,25 +26,35 @@
   <form id="form">
     <h1>Form Test</h1>
 
+    <p><input type="text" name="name" placeholder="Name"></p>
+    
+    <p>Are you a web developer? <input type="checkbox" name="webdeveloper"value="yes"></p>
+    
+    <input type="submit">
   </form>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="jquery.yoajaxform.js"></script>
   <script>
   $('#form').YoAjaxForm({
-    'formUrl'               : 'http://google.com',                // form url
-    'additionalData'        : 'q=foobar',                         // extra form data passed along              
-    'postAction'            : 'post_subscribe',                   // ajax action
-    'submitSelector'        : '[type=submit]',                    // selector for submit button
-    'beforeAjaxCallback'    : function(postDataString) {},        // called immediately before ajax request
-    'successTest'           : function(data) { return true },     // called to test the success of the ajax request
-    'validCallback'         : function($form) {},                 // called if form is valid 
-    'invalidCallback'       : function($form) {},                 // called if form is invalid 
-    'initCallback'          : function() {},                      // called if plugin initialized on an object
-    'successCallback'       : function(data) {},                  // called if form is successfully submitted
-    'failureCallback'       : function(data) {},                  // called if form submission fails
-    'errorCallback'         : function(data, status, error) {},   // called if the ajax call fails
-    'alwaysCallback'        : function(data, status) {}           // called if the ajax call fails
+    'formUrl'               : 'http://google.com',                
+    'additionalData'        : 'q=foobar',                         
+    'postAction'            : 'post_subscribe',                                
+    'beforeAjaxCallback'    : function(postDataString) {},        
+    'successTest'           : function(data) { return true },     
+    'validCallback'         : function($form) {
+      alert('valid');
+    },                 
+    'invalidCallback'       : function($form) {},                 
+    'initCallback'          : function() {
+      console.log( 'YoAjaxForm Initialized' );
+    },                      
+    'successCallback'       : function(data) {},                  
+    'failureCallback'       : function(data) {},                  
+    'errorCallback'         : function(data, status, error) {},   
+    'alwaysCallback'        : function(data, status) {            
+      alert( 'Form Submitted: ' + data + ', Status: ' + status );
+    }
   });
   </script> 
 

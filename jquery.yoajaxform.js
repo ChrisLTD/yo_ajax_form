@@ -17,7 +17,6 @@
       'formUrl'               : 'http://google.com',                // form url
       'additionalData'        : 'q=foobar',                         // extra form data passed along              
       'postAction'            : 'post_subscribe',                   // ajax action
-      'submitSelector'        : '[type=submit]',                    // selector for submit button
       'beforeAjaxCallback'    : function(postDataString) {},        // called immediately before ajax request
       'successTest'           : function(data) { return true },     // called to test the success of the ajax request
       'validCallback'         : function($form) {},                 // called if form is valid 
@@ -34,8 +33,8 @@
     var $form = $('form', $el);
     var showErrors = settings.showErrors;
     
-    // BIND ACTIONS TO BUTTONS
-    $(settings.submitSelector, $form).on('click', function(event) {
+    // BIND ACTIONS
+    $form.on('submit', function(event) {
       event.preventDefault();
       showErrors = true;
       if( validateForm( $form ) ){
@@ -51,10 +50,10 @@
       var validated = [];
 
       // Check for the different data validation fields, validate them in turn, return true or false
-      var presenceFieldsDataName = "[data-validate-presence]";              // check to see if any value is input
-      var presenceValueFieldsDataName = "[data-validate-value-presence]";   // check to see if any pseudo data-value exists
-      var emailFieldsDataName = "[data-validate-email]";                    // check for a valid email address 
-      var checkedFieldsDataName = "[data-validate-checked]";                // check checked checkbox
+      var presenceFieldsDataName = '[data-validate-presence]';              // check to see if any value is input
+      var presenceValueFieldsDataName = '[data-validate-value-presence]';   // check to see if any pseudo data-value exists
+      var emailFieldsDataName = '[data-validate-email]';                    // check for a valid email address 
+      var checkedFieldsDataName = '[data-validate-checked]';                // check checked checkbox
 
       var $presenceFields = $(presenceFieldsDataName, $form);
       var $presenceValueFields = $(presenceValueFieldsDataName, $form);
@@ -77,7 +76,7 @@
     function validatePresence(_this, dataName){
       var result = null;
       var $this = $(_this);
-      if( $this.val() !== "" ){
+      if( $this.val() !== '' ){
         result = true;
       } else {
         result = false;
@@ -103,7 +102,7 @@
     function validateValuePresence(_this, dataName){
       var result = null;
       var $this = $(_this);
-      if( $this.data('value') !== "" ){
+      if( $this.data('value') !== '' ){
         result = true;
       } else {
         result = false;
@@ -177,10 +176,9 @@
       var xhr = $.ajax({
           type: formAction,
           url:  formUrl,
-          data: postDataString + & + settings.additionalData
+          data: postDataString + '&' + settings.additionalData
       })
       .done(function(data){
-         // alert( "Form Submitted: " + data ); return;
          if( settings.successTest(data) ){
            $form.find('.submit').removeAttr('disabled'); // enable button
            settings.successCallback(data);

@@ -15,6 +15,7 @@
       'formUrl'               : 'http://google.com',                // form url
       'additionalData'        : 'q=foobar',                         // extra form data passed along              
       'postAction'            : 'post_subscribe',                   // ajax action
+      'submitSelector'        : '[type=submit]',                    // selector for submit button
       'beforeAjaxCallback'    : function(postDataString) {},        // called immediately before ajax request
       'successTest'           : function(data) { return true },     // called to test the success of the ajax request
       'validCallback'         : function($form) {},                 // called if form is valid 
@@ -32,23 +33,7 @@
     var showErrors = settings.showErrors;
     
     // BIND ACTIONS TO BUTTONS
-    $('input', $form).on('blur keyup', function(event) {
-      if( validateForm( $form ) ){
-        settings.validCallback( $form );
-      } else {
-        settings.invalidCallback( $form );
-      }
-    });
-
-    $('[data-faux-checkbox]', $form).on('click', function(event) {
-      if( validateForm( $form ) ){
-        settings.validCallback( $form );
-      } else {
-        settings.invalidCallback( $form );
-      } 
-    });
-
-    $('.submit', $form).on('click', function(event) {
+    $(settings.submitSelector, $form).on('click', function(event) {
       event.preventDefault();
       showErrors = true;
       if( validateForm( $form ) ){

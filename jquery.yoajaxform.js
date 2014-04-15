@@ -148,7 +148,7 @@
       var postDataMap = {};
       var postDataString = '';
 
-      canSubmit = false;
+      canSubmit = false; // keep form from being resubmitted while ajax is processing
 
       // Get all the form values
       $form.find('input, textarea').not('[type="checkbox"]').each(function(index, Element) {

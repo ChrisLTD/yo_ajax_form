@@ -28,8 +28,10 @@
 
 <body>
 
-  <h1>Form Test</h1>
+  
   <form id="form">
+    <h1>Form Test</h1>
+
     <input type="hidden" data-value="foobar" data-validate-value-presence="There needs to be some data-value here">
 
     <p>*<input type="text" name="name" placeholder="Name" data-validate-presence="Please enter a name"></p>
@@ -70,27 +72,27 @@
       <input type="submit">
     </form>
   </div>
+  <div id="qunit-fixture-no-validations">
+    <form id="form-no-validations">
+      <input type="hidden" data-value="foobar" data-validate-value-presence="There needs to be some data-value here">
+      
+      <p><input type="text" name="title" placeholder="Title"></p>
+
+      <p>Is your favorite color orange? <input type="checkbox" name="orange" value="yes"></p>
+
+      <input type="submit">
+    </form>
+  </div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="jquery.yoajaxform.js"></script>
   <script>
   $('#form').YoAjaxForm({
-    'formUrl'               : 'testresponse.json',                
-    'additionalData'        : 'q=foobar',                         
-    'postAction'            : 'post_subscribe',                                
-    'beforeAjaxCallback'    : function(postDataString) {},        
+    'formUrl'               : 'testresponse.json',
     'successTest'           : function(data) { var json = jQuery.parseJSON(data); return json.success; },     
-    'validCallback'         : function($form) {
-      alert('valid');
-    },                 
-    'invalidCallback'       : function($form) {},                 
-    'initCallback'          : function() {
-      console.log( 'YoAjaxForm Initialized' );
-    },                      
-    'successCallback'       : function(data) { alert('success!'); },                  
-    'failureCallback'       : function(data) {},                  
-    'errorCallback'         : function(data, status, error) {},   
-    'alwaysCallback'        : function(data, status) { alert( 'Form Submitted: ' + data + ', Status: ' + status ); }
+    'successCallback'       : function() { $('#form').html('<h1>Submission Successful</h1>'); },
+    'failureCallback'       : function() { $('#form').html('<h1>Submission Failed</h1>'); },
+    'errorCallback'         : function() { $('#form').html('<h1>AJAX Failed</h1>'); }
   });
   </script> 
 

@@ -16,7 +16,6 @@
       'formAction'            : 'POST',                             // GET or POST
       'formUrl'               : 'http://google.com',                // form url
       'additionalData'        : 'q=foobar',                         // extra form data passed along              
-      'postAction'            : 'post_subscribe',                   // ajax action
       'beforeAjaxCallback'    : function(postDataString) {},        // called immediately before ajax request
       'successTest'           : function(data) { return true },     // called to test the success of the ajax request, should return something truthy if successful
       'validCallback'         : function($form) {},                 // called if form is valid 

@@ -71,17 +71,21 @@
 
       <input type="submit">
     </form>
-  </div>
-  <div id="qunit-fixture-no-validations">
-    <form id="form-no-validations">
-      <input type="hidden" data-value="foobar" data-validate-value-presence="There needs to be some data-value here">
-      
-      <p><input type="text" name="title" placeholder="Title"></p>
 
-      <p>Is your favorite color orange? <input type="checkbox" name="orange" value="yes"></p>
+    <form id="form-no-validations">
+      <p><input type="text" name="valuetest" data-value="foo" value="bar"></p>
+
+      <p><input type="text" name="title" placeholder="Title" value="president"></p>
+
+      <p>Is your favorite color orange? <input type="checkbox" name="orange" value="orange"></p>
+
+      <p>Is your favorite color yellow? <input type="checkbox" name="yellow" value="yellow" checked></p>
+
+      <p><textarea name="comments" placeholder="Comments">lorem</textarea></p>
 
       <input type="submit">
     </form>
+
   </div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

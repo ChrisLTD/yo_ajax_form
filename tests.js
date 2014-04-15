@@ -75,3 +75,27 @@ test( 'Email validation', function() {
   $formTest.trigger('submit')
   ok( ($formTest.find('.error-message-validate-email').length == 0), 'should handle multiple dots and pluses' );
 });
+
+test( 'Post Data String', function() {
+  var $fixture = $('#qunit-fixture');
+  var $formTest = $('#form-no-validations', $fixture);
+  var postData = '';
+
+  $formTest.YoAjaxForm({
+    'formUrl'               : 'testresponse.json', 
+    'beforeAjaxCallback'    : function(postDataString) {
+                                postData = postDataString;
+                                console.log(postDataString);
+                              }
+  });
+
+  equal( postData, '', 'no data should be in yet');
+
+  $formTest.trigger('submit');
+
+  ok( (postData.indexOf('foo') >= 0), 'data-value should be sent');
+  ok( (postData.indexOf('president') >= 0), 'text input should be sent');
+  ok( (postData.indexOf('lorem') >= 0), 'textarea should be sent');
+  ok( (postData.indexOf('yellow') >= 0), 'checked value should be sent');
+  ok( !(postData.indexOf('orange') >= 0), 'unchecked value should not be sent');
+});

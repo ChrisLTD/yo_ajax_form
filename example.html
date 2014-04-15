@@ -14,10 +14,14 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   
+  <!-- UNIT TESTING STYLES -->
+  <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
+
   <style>
     body { font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif; text-align: center; }
     form { margin: 0 auto; max-width: 960px; padding: 1em; text-align: left; }
   </style>
+  
 
 </head>
 
@@ -32,6 +36,10 @@
     
     <input type="submit">
   </form>
+
+  <!-- UNIT TESTING MARKUP -->
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="jquery.yoajaxform.js"></script>
@@ -57,6 +65,10 @@
     }
   });
   </script> 
+
+  <!-- UNIT TESTING SCRIPTS -->
+  <script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
+  <script src="tests.js"></script>
 
 </body>
 </html>

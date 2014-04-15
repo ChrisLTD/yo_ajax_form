@@ -29,8 +29,8 @@
     }, options);
 
     // GLOBAL VARIABLES
+    var obj = this;
     var $form = $( this );
-    var showErrors = settings.showErrors;
     var canSubmit = true;
     
     // BIND ACTION
@@ -127,7 +127,7 @@
     }
     
     function displayErrors($this, result, dataName){
-      if( !showErrors ){
+      if( !settings.showErrors ){
         return;
       }
       $this.removeClass( settings.errorClass );

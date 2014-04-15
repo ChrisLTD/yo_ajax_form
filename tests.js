@@ -1,7 +1,7 @@
 test( 'Setup', function() {
   var $fixture = $('#qunit-fixture');
   var $formTest = $('#form-test', $fixture);
-  $formTest.YoAjaxForm();
+  $formTest.YoAjaxForm({'formUrl':'testresponse.json'});
 
   ok( $formTest.hasClass('yoajaxform-inited'), 'Initalized properly' );
 });
@@ -13,7 +13,7 @@ test( 'Validations', function() {
   // empty data value added
   $formTest.prepend('<input type="hidden" data-value="" data-validate-value-presence="We need a data-value">');  
 
-  $formTest.YoAjaxForm();
+  $formTest.YoAjaxForm({'formUrl':'testresponse.json'});
   $formTest.trigger('submit');
 
   ok( ($formTest.find('.error-message-validate-presence').length > 0), 'validate presence working' );
@@ -29,7 +29,7 @@ test( 'Removing error messages', function() {
   // empty data value added
   $formTest.prepend('<input type="hidden" data-value="" data-validate-value-presence="We need a data-value">');  
 
-  $formTest.YoAjaxForm();
+  $formTest.YoAjaxForm({'formUrl':'testresponse.json'});
   $formTest.trigger('submit'); // generate error messages as per the 'Validations' test
 
   // add valid data
@@ -49,7 +49,7 @@ test( 'Email validation', function() {
   var $fixture = $('#qunit-fixture');
   var $formTest = $('#form-test', $fixture);
 
-  $formTest.YoAjaxForm();
+  $formTest.YoAjaxForm({'formUrl':'testresponse.json'});
 
   $formTest.find('[data-validate-email]').val('name');
   $formTest.trigger('submit')

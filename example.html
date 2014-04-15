@@ -79,7 +79,7 @@
     'additionalData'        : 'q=foobar',                         
     'postAction'            : 'post_subscribe',                                
     'beforeAjaxCallback'    : function(postDataString) {},        
-    'successTest'           : function(data) { return true },     
+    'successTest'           : function(data) { var json = jQuery.parseJSON(data); return json.success; },     
     'validCallback'         : function($form) {
       alert('valid');
     },                 
@@ -87,12 +87,10 @@
     'initCallback'          : function() {
       console.log( 'YoAjaxForm Initialized' );
     },                      
-    'successCallback'       : function(data) {},                  
+    'successCallback'       : function(data) { alert('success!'); },                  
     'failureCallback'       : function(data) {},                  
     'errorCallback'         : function(data, status, error) {},   
-    'alwaysCallback'        : function(data, status) {            
-      alert( 'Form Submitted: ' + data + ', Status: ' + status );
-    }
+    'alwaysCallback'        : function(data, status) { alert( 'Form Submitted: ' + data + ', Status: ' + status ); }
   });
   </script> 
 

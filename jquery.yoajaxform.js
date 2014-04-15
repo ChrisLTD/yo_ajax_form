@@ -31,12 +31,15 @@
     // GLOBAL VARIABLES
     var $form = $( this );
     var showErrors = settings.showErrors;
+    var canSubmit = true;
     
     // BIND ACTION
 
     $form.on('submit', function(event) {
       event.preventDefault();
-      showErrors = true;
+      if( !canSubmit ){
+        return;
+      }
       if( validateForm( $form ) ){
         subscribe_ajax();
         settings.validCallback( $form );
@@ -145,7 +148,7 @@
       var postDataMap = {};
       var postDataString = '';
 
-      $form.find('.submit').attr('disabled', 'disabled'); // disable button
+      canSubmit = false;
 
       // Get all the form values
       $form.find('input, textarea').not('[type="checkbox"]').each(function(index, Element) {
@@ -180,7 +183,7 @@
       })
       .done(function(data){
          if( settings.successTest(data) ){
-           $form.find('.submit').removeAttr('disabled'); // enable button
+           canSubmit = true;
            settings.successCallback(data);
          } else {
            settings.failureCallback(data);

@@ -18,7 +18,7 @@
       'additionalData'        : 'q=foobar',                         // extra form data passed along              
       'postAction'            : 'post_subscribe',                   // ajax action
       'beforeAjaxCallback'    : function(postDataString) {},        // called immediately before ajax request
-      'successTest'           : function(data) { return true },     // called to test the success of the ajax request
+      'successTest'           : function(data) { return true },     // called to test the success of the ajax request, should return something truthy if successful
       'validCallback'         : function($form) {},                 // called if form is valid 
       'invalidCallback'       : function($form) {},                 // called if form is invalid 
       'initCallback'          : function() {},                      // called if plugin initialized on an object
@@ -183,7 +183,6 @@
       })
       .done(function(data){
          if( settings.successTest(data) ){
-           canSubmit = true;
            settings.successCallback(data);
          } else {
            settings.failureCallback(data);
@@ -193,6 +192,7 @@
         settings.errorCallback(data, status, error);
       })
       .always(function(data, status){
+        canSubmit = true;
         settings.alwaysCallback(data, status);  
       });
     }

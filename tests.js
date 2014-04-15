@@ -44,3 +44,34 @@ test( 'Removing error messages', function() {
   equal( $formTest.find('.error-message-validate-email').length, 0, 'email error messages being removed' );
   equal( $formTest.find('.error-message-validate-checked').length, 0, 'checked error messages being removed' );
 });
+
+test( 'Email validation', function() {
+  var $fixture = $('#qunit-fixture');
+  var $formTest = $('#form-test', $fixture);
+
+  $formTest.YoAjaxForm();
+
+  $formTest.find('[data-validate-email]').val('name');
+  $formTest.trigger('submit')
+  ok( ($formTest.find('.error-message-validate-email').length > 0), 'missing @, domain and extension' );
+
+  $formTest.find('[data-validate-email]').val('name@');
+  $formTest.trigger('submit')
+  ok( ($formTest.find('.error-message-validate-email').length > 0), 'missing domain and extension' );
+
+  $formTest.find('[data-validate-email]').val('@doman.com');
+  $formTest.trigger('submit')
+  ok( ($formTest.find('.error-message-validate-email').length > 0), 'missing name' );
+
+  $formTest.find('[data-validate-email]').val('name@test');
+  $formTest.trigger('submit')
+  ok( ($formTest.find('.error-message-validate-email').length > 0), 'missing extension' );
+
+  $formTest.find('[data-validate-email]').val('name@test.com');
+  $formTest.trigger('submit')
+  ok( ($formTest.find('.error-message-validate-email').length == 0), 'all good' );
+
+  $formTest.find('[data-validate-email]').val('na.m+e@te.st.com');
+  $formTest.trigger('submit')
+  ok( ($formTest.find('.error-message-validate-email').length == 0), 'should handle multiple dots and pluses' );
+});

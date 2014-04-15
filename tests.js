@@ -83,10 +83,7 @@ test( 'Post Data String', function() {
 
   $formTest.YoAjaxForm({
     'formUrl'               : 'testresponse.json', 
-    'beforeAjaxCallback'    : function(postDataString) {
-                                postData = postDataString;
-                                console.log(postDataString);
-                              }
+    'beforeAjaxCallback'    : function(postDataString) { postData = postDataString; }
   });
 
   equal( postData, '', 'no data should be in yet');
@@ -99,3 +96,40 @@ test( 'Post Data String', function() {
   ok( (postData.indexOf('yellow') >= 0), 'checked value should be sent');
   ok( !(postData.indexOf('orange') >= 0), 'unchecked value should not be sent');
 });
+
+asyncTest( 'Successful response', function() {
+  expect(1); // only have 1 test
+  var $fixture = $('#qunit-fixture');
+  var $formTest = $('#form-no-validations', $fixture);
+
+  $formTest.YoAjaxForm({
+    'formUrl'               : 'testresponse.json',
+    'successTest'           : function(data) { var json = jQuery.parseJSON(data); return json.success; }, 
+    'alwaysCallback'        : function(data) { 
+                                var json = jQuery.parseJSON(data); 
+                                equal( json.success, 1, 'json.success should be truthy'); 
+                                start(); // we have our answer, continue testing
+                              }
+  });
+
+  $formTest.trigger('submit');
+});
+
+asyncTest( 'Failure response', function() {
+  expect(1); // we only have 1 test
+  var $fixture = $('#qunit-fixture');
+  var $formTest = $('#form-no-validations', $fixture);
+
+  $formTest.YoAjaxForm({
+    'formUrl'               : 'testresponse-failure.json',
+    'successTest'           : function(data) { var json = jQuery.parseJSON(data); return json.success; }, 
+    'alwaysCallback'        : function(data) { 
+                                var json = jQuery.parseJSON(data); 
+                                equal( json.success, 0, 'json.success should be falsy'); 
+                                start(); // we have our answer, continue testing
+                              }
+  });
+
+  $formTest.trigger('submit');
+});
+

@@ -20,6 +20,7 @@
   <style>
     body { font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif; text-align: center; }
     form { margin: 0 auto; max-width: 960px; padding: 1em; text-align: left; }
+    .error-message { color: red; display: block; font-size: 80%; }
   </style>
   
 
@@ -27,19 +28,48 @@
 
 <body>
 
+  <h1>Form Test</h1>
   <form id="form">
-    <h1>Form Test</h1>
+    <input type="hidden" data-value="foobar" data-validate-value-presence="There needs to be some data-value here">
 
-    <p><input type="text" name="name" placeholder="Name"></p>
+    <p>*<input type="text" name="name" placeholder="Name" data-validate-presence="Please enter a name"></p>
+
+    <p>*<input type="text" name="email" placeholder="Email" data-validate-email="Please enter a valid email"></p>
+
+    <p><input type="text" name="title" placeholder="Title"></p>
     
-    <p>Are you a web developer? <input type="checkbox" name="webdeveloper"value="yes"></p>
-    
+    <p>*Are you a web developer? <input type="checkbox" name="webdeveloper" value="yes" data-validate-checked="You need to be a web developer"></p>
+
+    <p>Is your favorite color orange? <input type="checkbox" name="orange" value="yes"></p>
+
+    <p>*<textarea name="essay" placeholder="Essay" data-validate-presence="Please type your essay"></textarea></p>    
+    <p><textarea name="comments" placeholder="Comments"></textarea></p>  
+
     <input type="submit">
   </form>
 
   <!-- UNIT TESTING MARKUP -->
   <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
+  <div id="qunit-fixture">
+    <form id="form-test">
+      <input type="hidden" data-value="foobar" data-validate-value-presence="There needs to be some data-value here">
+
+      <p>*<input type="text" name="name" placeholder="Name" data-validate-presence="Please enter a name"></p>
+
+      <p>*<input type="text" name="email" placeholder="Email" data-validate-email="Please enter a valid email"></p>
+
+      <p><input type="text" name="title" placeholder="Title"></p>
+      
+      <p>*Are you a web developer? <input type="checkbox" name="webdeveloper" value="yes" data-validate-checked="You need to be a web developer"></p>
+
+      <p>Is your favorite color orange? <input type="checkbox" name="orange" value="yes"></p>
+
+      <p>*<textarea name="essay" placeholder="Essay" data-validate-presence="Please type your essay"></textarea></p>    
+      <p><textarea name="comments" placeholder="Comments"></textarea></p>  
+
+      <input type="submit">
+    </form>
+  </div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="jquery.yoajaxform.js"></script>

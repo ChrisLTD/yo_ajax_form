@@ -29,11 +29,11 @@
     }, options);
 
     // GLOBAL VARIABLES
-    var $el = $( this );
-    var $form = $('form', $el);
+    var $form = $( this );
     var showErrors = settings.showErrors;
     
-    // BIND ACTIONS
+    // BIND ACTION
+
     $form.on('submit', function(event) {
       event.preventDefault();
       showErrors = true;
@@ -132,7 +132,7 @@
       if( !result ){
         var dataAttribute = dataName.substr(6);
         dataAttribute = dataAttribute.substr(0, dataAttribute.length-1);
-        $this.after('<span class="' + settings.errorMessageClass + '">' + $this.data(dataAttribute) + '</span>');
+        $this.after('<span class="' + settings.errorMessageClass + ' ' + settings.errorMessageClass + '-' + dataAttribute + '">' + $this.data(dataAttribute) + '</span>');
         $this.addClass( settings.errorClass );
       }
     }
@@ -174,8 +174,8 @@
       settings.beforeAjaxCallback(postDataString);
 
       var xhr = $.ajax({
-          type: formAction,
-          url:  formUrl,
+          type: settings.formAction,
+          url:  settings.formUrl,
           data: postDataString + '&' + settings.additionalData
       })
       .done(function(data){
@@ -195,6 +195,7 @@
     }
 
     // INITIALIZED
+    $form.addClass('yoajaxform-inited');
     settings.initCallback();
 
     return this;
